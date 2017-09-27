@@ -19,7 +19,7 @@ The cut-and-paste paradigm is not new. However, as is the case with the typical 
 Klipper for Linux and Jumpcut for Mac OS X are desktop applications that serve as inspiration for this Android project. Developers should investigate these desktop applications for foundational understanding. Clipboard management applications exist for Android. However, EVERGREEN is distinct from these in that it is NOT a clipboard manager; it is a clipboard buffer. Clipboard managers are often full applications that steal application focus from the currently running application. EVERGREEN and Jumpcut/Klipper run in the background and are accessed by a status bar icon. When the icon is clicked the user interface is not hijacked by the clipboard application. Instead, a simple and non-intrusive desktop menu appears over the top of any running applications with a list of the most recent clippings. Once a clipping is selected, the menu disappears and the paste buffer contains the selected clipping (not necessarily the most recently copied item).
 
 
-# High-Level Requirements
+## High-Level Requirements
 
 EVERGREEN has two primary user interfaces: the clipboard buffer (BUFFER) and a configuration interface (PREFS). The BUFFER should be presented to the user after at most three touches from any application that doesn't hide the status bar (fewer the better). The first touch will likely be on the status bar. It may be possible to reuse a physical or capacitive button (such as the menu button) to access the BUFFER. However, this is not a requirement and may not even be a good idea.
 
