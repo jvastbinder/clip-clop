@@ -51,6 +51,11 @@ Evergreen has two primary interfaces: a buffer interface and a prefs interface.
 
 **Mark:** Mark downloads Evergreen because he is bored. He looks at the icon, the name, and the two interfaces and starts composing poetry because that is the only way he can adequately describe the simplicity and intuitive nature of the interfaces, the synergy of the name and icon, and the amazingly fast and responsive features.
 
+## Wireframes
 
+![Wireframe1](/wireframe1.PNG)
+![Wireframe2](/wireframe2.PNG)
+![Wireframe3](/wireframe3.PNG)
+![Wireframe4](/wireframe4.PNG)
 
 
