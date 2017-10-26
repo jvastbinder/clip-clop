@@ -49,7 +49,7 @@ Evergreen has two primary interfaces: a buffer interface and a prefs interface.
 
 **Betty:** Jeff has just sent betty his contact information over text. Betty wants to create a new contact for Jeff on her phone, so she copies "Jeff", "Grungan", "JeffGrunganhatestheveryideaofcheesecake@cheesecakehaters.org", and "Chief of Cheesecake Disliking" seperately while she is in her texting app. She then switches to her contacts app and uses Evergreen to paste in each of Jeff's different contact fields without having to switch between apps.
 
-**Mark** Mark downloads Evergreen because he is bored. He looks at the icon, the name, and the two interfaces and starts composing poetry because that is the only way he can adequately describe the simplicity and intuitive nature of the interfaces, the synergy of the name and icon, and the amazingly fast and responsive features.
+**Mark:** Mark downloads Evergreen because he is bored. He looks at the icon, the name, and the two interfaces and starts composing poetry because that is the only way he can adequately describe the simplicity and intuitive nature of the interfaces, the synergy of the name and icon, and the amazingly fast and responsive features.
 
 
 
