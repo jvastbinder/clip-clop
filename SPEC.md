@@ -39,6 +39,7 @@ Evergreen has two primary interfaces: a buffer interface and a prefs interface.
 | As a | I want to | In order to |
 |------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---|
 | User | have a copied item saved to a persistent notifaction | Use it later |
+| User | view my history of copied items | pick an item from my clipboard history | 
 ### Prefs Interface
 | Behavior | Priority | Status | Time estimate (hr) | 
 |-|-|-|-| 
