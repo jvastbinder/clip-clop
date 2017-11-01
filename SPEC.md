@@ -35,11 +35,7 @@ Evergreen has two primary interfaces: a buffer interface and a prefs interface.
 | When the user copies an item, the item will be diplayed in the buffer interface | high | not started | 5 | 
 | EVERGREEN will persistently display a notification that can be used to access the butter interface | high | not started | 4 | 
 | Pinned items will appear in a different list than the recently copied items | med | not started | 2  | 
-#### Buffer User Stories
-| As a | I want to | In order to |
-|------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---|
-| User | have a copied item saved to a persistent notifaction | Use it later |
-| User | view my history of copied items | pick an item from my clipboard history | 
+
 ### Prefs Interface
 | Behavior | Priority | Status | Time estimate (hr) | 
 |-|-|-|-| 
@@ -48,6 +44,16 @@ Evergreen has two primary interfaces: a buffer interface and a prefs interface.
 | The prefs interface will allow the user to select how many clippings to save in the buffer at one time | med | not started | 1 | 
 | The prefs interface will use a UI theme which is popular in other Android configuration menus | low| not started | 1 | 
 | The prefs interface will be as simple as possible while still presenting the required information | med | not started | 1 | 
+
+## User Stories
+As a user I want to have a copied item saved to a persistent notifaction in order to use it later. 
+------------------------------------------------------------------------------------------------------------
+As a user I want to view my history of copied items in order to pick an item from my clipboard history. 
+------------------------------------------------------------------------------------------------------------
+As a user I want to change the number of stored recnetly copied items in order to cater the app to my need.
+------------------------------------------------------------------------------------------------------------
+As a user I want to select a stored item to be put into their current clipbaord in order to save time and decrease key strokes.
+------------------------------------------------------------------------------------------------------------
 
 ## Scenarios
 **Jeff:** Jeff has gotten tired of typing "JeffGrunganhatestheveryideaofcheesecake@cheesecakehaters.org" into every email field, so he uses Evergreen to pin his email address. Now whenever he is prompted to enter his email address, he can quickly access it from any screen and paste it in.
