@@ -50,7 +50,7 @@ As a user I want to have a copied item saved to a persistent notifaction in orde
 ------------------------------------------------------------------------------------------------------------
 As a user I want to view my history of copied items in order to pick an item from my clipboard history. 
 ------------------------------------------------------------------------------------------------------------
-As a user I want to change the number of stored recnetly copied items in order to cater the app to my need.
+As a user I want to change the number of stored recently copied items in order to cater the app to my need.
 ------------------------------------------------------------------------------------------------------------
 As a user I want to select a stored item to be put into their current clipbaord in order to save time and decrease key strokes.
 ------------------------------------------------------------------------------------------------------------
