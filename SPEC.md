@@ -35,6 +35,10 @@ Evergreen has two primary interfaces: a buffer interface and a prefs interface.
 | When the user copies an item, the item will be diplayed in the buffer interface | high | not started | 5 | 
 | EVERGREEN will persistently display a notification that can be used to access the butter interface | high | not started | 4 | 
 | Pinned items will appear in a different list than the recently copied items | med | not started | 2  | 
+#### Buffer User Stories
+| As a | I want to | In order to |
+|------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---|
+| User | have a copied item saved to a persistent notifaction | Use it later |
 ### Prefs Interface
 | Behavior | Priority | Status | Time estimate (hr) | 
 |-|-|-|-| 
