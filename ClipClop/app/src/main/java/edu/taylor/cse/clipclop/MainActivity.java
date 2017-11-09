@@ -25,6 +25,12 @@ public class MainActivity extends AppCompatActivity {
                 .setContentTitle("Buffer Interface")
                 .setContentText("This is how the Buffer will be accessed")
                 .setOngoing(true);
+
+        //Add copied string to clipboard by initializing listener
+        clipboardListener clipboardListener0 = new clipboardListener();
+        mBuilder.setContentText(clipboardListener0.clipQueue.remove());
+
+
         // Creates an explicit intent for an Activity in your app
         Intent resultIntent = new Intent(this, MainActivity.class);
 
