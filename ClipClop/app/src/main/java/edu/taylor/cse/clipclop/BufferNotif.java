@@ -15,6 +15,7 @@ import android.support.v4.app.NotificationCompat;
 import android.graphics.Color;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
+import android.widget.RemoteViews;
 
 /**
  * Helper class for showing and canceling buffer notif
@@ -44,8 +45,8 @@ public class BufferNotif {
      *
      * @see #cancel(Context)
      */
-    public static void notify(final Context context,
-                              final String exampleString, final int number) {
+    public static void notify(final Context context)
+    {
         final Resources res = context.getResources();
 
         // This image is used as the notification's large icon (thumbnail).
@@ -57,11 +58,13 @@ public class BufferNotif {
         exampleItem.setSpan(new ForegroundColorSpan(Color.WHITE), 0, exampleItem.length(), 0);
         exampleItem.append("   Example content");
 
-        final String ticker = exampleString;
-        final String title = res.getString(
-                R.string.buffer_notif_notification_title_template, exampleString);
-        final String text = res.getString(
-                R.string.buffer_notif_notification_placeholder_text_template, exampleString);
+        final String ticker = "Ticker";
+        final String title = "Sauce";
+                //res.getString(R.string.buffer_notif_notification_title_template,"Cheese");
+        final String text = "Alpppaca";
+                res.getString(R.string.buffer_notif_notification_placeholder_text_template, "Textttt");
+
+        RemoteViews view= new RemoteViews(context.getPackageName(),R.layout.buffer_layout);
 
         final NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
 
@@ -88,19 +91,6 @@ public class BufferNotif {
                 // Set ticker text (preview) information for this notification.
                 .setTicker(ticker)
 
-                // Show a number. This is useful when stacking notifications of
-                // a single type.
-                .setNumber(number)
-
-                // If this notification relates to a past or upcoming event, you
-                // should set the relevant time information using the setWhen
-                // method below. If this call is omitted, the notification's
-                // timestamp will by set to the time at which it was shown.
-                // TODO: Call setWhen if this notification relates to a past or
-                // upcoming event. The sole argument to this method should be
-                // the notification timestamp in milliseconds.
-                //.setWhen(...)
-
                 // Set the pending intent to be initiated when the user touches
                 // the notification.
                 .setContentIntent(
@@ -110,15 +100,7 @@ public class BufferNotif {
                                 new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com")),
                                 PendingIntent.FLAG_UPDATE_CURRENT))
 
-                // Show an expanded list of items on devices running Android 4.1
-                // or later.
-                .setStyle(new NotificationCompat.InboxStyle()
-                        .addLine(exampleItem)
-                        .addLine(exampleItem)
-                        .addLine(exampleItem)
-                        .addLine(exampleItem)
-                        .setBigContentTitle(title)
-                        .setSummaryText("Dummy summary text"))
+                .setCustomBigContentView(view)
 
                 // Example additional actions for this notification. These will
                 // only show on devices running Android 4.1 or later, so you
@@ -141,7 +123,7 @@ public class BufferNotif {
                         null)
 
                 // Automatically dismiss the notification when it is touched.
-                .setAutoCancel(true);
+                .setOngoing(true);
 
         notify(context, builder.build());
     }

@@ -16,16 +16,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        final Runnable task = new Runnable() {
-//            @Override
-//            public void run() {
-                BufferNotif notif= new BufferNotif();
-
-                notif.notify(this,"Potato",3);      //code you want to run every second
-//            }
-//        };
-
- //       task.run();
+        BufferNotif.notify(this);      //code you want to run every second
 
     }
 }
