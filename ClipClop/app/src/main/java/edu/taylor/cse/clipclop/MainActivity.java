@@ -7,9 +7,11 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import java.util.LinkedList;
 import java.util.Queue;
@@ -19,21 +21,23 @@ public class MainActivity extends AppCompatActivity {
     private ClipData currentClipData;
     private String convertedClipData;
     private Queue<String> clipQueue;
+    private int notifyID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        NotificationManager mNotificationManager =
+        final NotificationManager mNotificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-
-
-        final Notification.Builder mBuilder = new Notification.Builder(this)
+        //create ID so we can update the notification
+        notifyID = 1;
+        final NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.drawable.clip)
                 .setContentTitle("Buffer Interface")
                 .setContentText("This is how the Buffer will be accessed")
                 .setOngoing(true);
+                mNotificationManager.notify(notifyID, mBuilder.build());
 
 
 
@@ -43,12 +47,7 @@ public class MainActivity extends AppCompatActivity {
                 "What is on clipboard currently",
                 "Add to buffer");
         clipQueue = new LinkedList<String>();
-
-//        clipboardListener clipboardListener0 = new clipboardListener();
-        String exampleString = "Copied Text Goes Here!";
-        clipQueue.add(exampleString);
-        mBuilder.setContentText(clipQueue.peek());
-
+        
         mClipboard.addPrimaryClipChangedListener(
                 new ClipboardManager.OnPrimaryClipChangedListener() {
                     @Override
@@ -56,9 +55,11 @@ public class MainActivity extends AppCompatActivity {
                         currentClipData = mClipboard.getPrimaryClip();
                         convertedClipData = currentClipData.toString();
                         clipQueue.add(convertedClipData);
-                        mBuilder.setContentText(clipQueue.peek());
+                        mBuilder.setContentText(clipQueue.poll());
+                        mNotificationManager.notify(notifyID, mBuilder.build());
                     }
                 });
+
 
 
 
