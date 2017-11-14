@@ -16,12 +16,15 @@ import android.widget.Toast;
 import java.util.LinkedList;
 import java.util.Queue;
 
+
 public class MainActivity extends AppCompatActivity {
     private ClipboardManager mClipboard;
     private ClipData clip;
     private String convertedClipData;
     private Queue<String> clipQueue;
     private int notifyID;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,5 +87,10 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
+       PasteBuffer paste = new PasteBuffer();
+       paste.setContext(getApplicationContext());
+       paste.setPasteContent("pasteItem","Copied Item Text 1");
     }
+
+
 }
