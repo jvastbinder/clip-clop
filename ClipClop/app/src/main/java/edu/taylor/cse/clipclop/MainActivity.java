@@ -18,13 +18,6 @@ import java.util.Queue;
 
 
 public class MainActivity extends AppCompatActivity {
-    private ClipboardManager mClipboard;
-    private ClipData clip;
-    private String convertedClipData;
-    private Queue<String> clipQueue;
-    private int notifyID;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
         final NotificationManager mNotificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         //create ID so we can update the notification
-        notifyID = 0;
         final NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.drawable.clip)
                 .setContentTitle("Buffer Interface")
@@ -64,28 +56,9 @@ public class MainActivity extends AppCompatActivity {
         mNotificationManager.notify(0, mBuilder.build());
 
         //Add copied string to clipboard by initializing listener
-        mClipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
-        clip = ClipData.newPlainText(
-                "What is on clipboard currently",
-                "Add to buffer");
-        clipQueue = new LinkedList<String>();
+        ClipboardListener cliplistener = new ClipboardListener(getApplicationContext());
+        cliplistener.setNumClips(4);
 
-        mClipboard.addPrimaryClipChangedListener(
-                new ClipboardManager.OnPrimaryClipChangedListener() {
-                    @Override
-                    public void onPrimaryClipChanged() {
-                        clip = mClipboard.getPrimaryClip();
-                        if(   clip == null
-                                || clip.getItemCount() == 0
-                                || clip.getItemCount() > 0 && clip.getItemAt(0).getText() == null
-                                )
-                            return;
-                        convertedClipData = clip.getItemAt(0).getText().toString();
-                        clipQueue.add(convertedClipData);
-                        mBuilder.setContentText(clipQueue.poll());
-                        mNotificationManager.notify(notifyID, mBuilder.build());
-                    }
-                });
 
        PasteBuffer paste = new PasteBuffer();
        paste.setContext(getApplicationContext());
