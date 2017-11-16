@@ -7,9 +7,9 @@ Status: Incomplete
 ClipClop is an expansion of the clipboard in Android. It will allow it's users to copy and paste more than one string at a time. ClipClop will remember the last few copies and allow the user to select which of them to paste.
 
 ## General specifications
-| What | Priority | Status | Time estimate (hr) | 
+| What | Priority | 
 |-|-|-|-| 
-| The application will have a name other than EVERGREEN | med | done | 1 | 
+| The application will have a name other than EVERGREEN | med | 
 | The application will have an associated launcher icon that can be used without copyright claims. | med |
 | The application will appear in the top ten apps listed when a user searches for “copy and paste” or “clipboard” in the Google play store. | low | 
 | ClipClop will operate with full functionality on any phone running Android 4.2 or higher | high |
