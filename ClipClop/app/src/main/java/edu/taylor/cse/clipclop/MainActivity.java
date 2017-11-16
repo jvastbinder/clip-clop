@@ -8,9 +8,11 @@ import android.content.Intent;
 import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.EditText;
+import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
-
+int bufferSize = 5;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,5 +49,20 @@ public class MainActivity extends AppCompatActivity {
         // number to NotificationManager.cancel().
         mNotificationManager.notify(0, mBuilder.build());
 
+    }
+
+    public void plusButton(View view){
+        changeBufferSizeDisplay(++bufferSize);
+    }
+
+    public void minusButton(View view){
+        changeBufferSizeDisplay(--bufferSize);
+    }
+
+    private void changeBufferSizeDisplay(int size)
+    {
+        //TODO decide min/max buffer size and handle accordingly
+        EditText bufferSizeDisplay = (EditText) findViewById(R.id.editText);
+        bufferSizeDisplay.setText("" + size);
     }
 }
