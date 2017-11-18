@@ -3,13 +3,20 @@ package edu.taylor.cse.clipclop;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.EditText;
 import android.view.View;
+import android.widget.Toast;
+import java.util.LinkedList;
+import java.util.Queue;
+
 
 public class MainActivity extends AppCompatActivity {
 int bufferSize = 5;
@@ -18,15 +25,15 @@ int bufferSize = 5;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        NotificationManager mNotificationManager =
+        final NotificationManager mNotificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-
-
-        Notification.Builder mBuilder = new Notification.Builder(this)
+        //create ID so we can update the notification
+        final NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.drawable.clip)
                 .setContentTitle("Buffer Interface")
                 .setContentText("This is how the Buffer will be accessed")
                 .setOngoing(true);
+
         // Creates an explicit intent for an Activity in your app
         Intent resultIntent = new Intent(this, MainActivity.class);
 
@@ -49,6 +56,14 @@ int bufferSize = 5;
         // number to NotificationManager.cancel().
         mNotificationManager.notify(0, mBuilder.build());
 
+        //Add copied string to clipboard by initializing listener
+        ClipboardListener cliplistener = new ClipboardListener(getApplicationContext());
+        cliplistener.setNumClips(4);
+
+
+       PasteBuffer paste = new PasteBuffer();
+       paste.setContext(getApplicationContext());
+       paste.setPasteContent("pasteItem","Copied Item Text 1");
     }
 
     public void plusButton(View view){
@@ -65,4 +80,5 @@ int bufferSize = 5;
         EditText bufferSizeDisplay = (EditText) findViewById(R.id.editText);
         bufferSizeDisplay.setText("" + size);
     }
+
 }
