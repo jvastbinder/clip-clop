@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 public class PasteBuffer extends AppCompatActivity {
     Context context = null;
-    public  void setContext(Context c) {
+    public PasteBuffer (Context c) {
         this.context = c;
 
     }
