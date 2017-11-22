@@ -17,8 +17,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ListView listView = (ListView) findViewById(R.id.testList);
-        BufferNotif.notify(this, listView);
+        BufferNotif.notify(this);
 
     }
 }

@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -34,19 +35,18 @@ public class BufferNotif {
      * this type, with the given parameters.
      * @see #cancel(Context)
      */
-    public static void notify(final Context context, ListView listView)
+    public static void notify(final Context context)
     {
         final Resources res = context.getResources();
-        String [] listItems = new String[]{"Copied item 1", "Copied item 2", "Copied item 3"};//TODO
 
         RemoteViews contentView= new RemoteViews(context.getPackageName(),R.layout.buffer_layout);
         //contentView.setTextViewText(R.id.title, "Custom notification");
         //contentView.setTextViewText(R.id.text, "This is a custom layout");
+        Intent serviceIntent = new Intent(context, BufferDisplayService.class);
+//      serviceIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, 0);
+//      serviceIntent.setData(Uri.parse(serviceIntent.toUri(Intent.URI_INTENT_SCHEME)));
+        contentView.setRemoteAdapter(R.id.buffer_listView,serviceIntent);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(context,
-                android.R.layout.simple_list_item_1, listItems);
-
-        listView.setAdapter(adapter);
 
         final NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
 
