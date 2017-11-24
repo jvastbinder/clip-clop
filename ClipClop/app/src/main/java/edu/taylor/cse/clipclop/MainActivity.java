@@ -1,12 +1,6 @@
 package edu.taylor.cse.clipclop;
 
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.EditText;
@@ -15,6 +9,9 @@ import android.widget.Toast;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import java.util.LinkedList;
+
+public class MainActivity extends AppCompatActivity {
 
 
 public class MainActivity extends AppCompatActivity {
