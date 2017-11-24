@@ -19,7 +19,8 @@ public class BufferService extends IntentService {
         else if (intent.getAction().contains("edu.taylor.cse.place_in_clipboard"))
         {
             String bufferItem = intent.getStringExtra("pasteItem");
-            //TODO Krista's code here
+            PasteBuffer paste = new PasteBuffer(getApplicationContext());
+            paste.setPasteContent("pasteItem",bufferItem);
         }
     }
 }
