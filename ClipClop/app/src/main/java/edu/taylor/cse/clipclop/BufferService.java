@@ -16,10 +16,9 @@ public class BufferService extends IntentService {
         {
             BufferNotif.showBigBufferInterface();
         }
-        else if (intent.getAction() == "edu.taylor.cse.place_in_clipboard")
+        else if (intent.getAction().contains("edu.taylor.cse.place_in_clipboard"))
         {
             String bufferItem = intent.getStringExtra("pasteItem");
-            bufferItem.getBytes();
             //TODO Krista's code here
         }
     }

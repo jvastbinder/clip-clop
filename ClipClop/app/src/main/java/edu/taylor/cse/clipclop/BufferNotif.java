@@ -57,6 +57,8 @@ public class BufferNotif {
                 .setSmallIcon(R.drawable.ic_stat_buffer_notif)
                 .setContentText(String.format("%d items ready to paste", buffer.size()))
                 .setContentTitle("Clip Buffer")
+                .setGroup("buffer")
+                .setGroupSummary(true)
 
 
                 // Set the pending intent to be initiated when the user touches the notification.
@@ -75,19 +77,23 @@ public class BufferNotif {
         for (String item: buffer)
         {
             Intent pasteIntent = new Intent(context, BufferService.class);
-            pasteIntent.setAction("edu.taylor.cse.place_in_clipboard");
-            pasteIntent.putExtra("pasteItem", item);
+            pasteIntent.setAction("edu.taylor.cse.place_in_clipboard-"+item)
+                    .putExtra("pasteItem", item);
 
             NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
                     .setCategory(Notification.CATEGORY_SERVICE)
-                    .setShowWhen(false) //when is still showed :(
+                    //.setShowWhen(false) //when is still showed :(
                     .setSmallIcon(R.drawable.ic_stat_buffer_notif)
                     .setContentIntent(
-                        PendingIntent.getService(context, 0, pasteIntent,0))
+                        PendingIntent.getService(context,
+                                0,
+                                pasteIntent,
+                                PendingIntent.FLAG_CANCEL_CURRENT))
+                  //  .setGroup("buffer")
                     .setContentTitle(item);
 
             notify(context, builder.build(),notifId);
-            notifId++;
+            notifId+=1;
        }
 
     }
@@ -104,8 +110,7 @@ public class BufferNotif {
     }
 
     /**
-     * Cancels any notifications of this type previously shown using
-     * {@link #notify(Context, String, int)}.
+     * Cancels any notifications of this type
      */
     @TargetApi(Build.VERSION_CODES.ECLAIR)
     public static void cancel(final Context context) {
