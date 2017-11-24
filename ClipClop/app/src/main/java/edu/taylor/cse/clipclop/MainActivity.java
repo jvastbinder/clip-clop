@@ -1,14 +1,10 @@
 package edu.taylor.cse.clipclop;
 
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
-import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.ListView;
+
+import java.util.LinkedList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,7 +13,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        BufferNotif.notify(this);
+        LinkedList<String> buffer = new LinkedList<>();
+
+        buffer.add("David Tomas");
+        buffer.add("Adam Bloomenberg");
+        buffer.add("Chris Happpner");
+        buffer.add("Andrew Hurse");
+        buffer.add("John Vasbinder");
+
+        BufferNotif.setContext(this);
+        BufferNotif.setBufferContents(buffer);
+        BufferNotif.showBigBufferInterface();
 
     }
+
 }
