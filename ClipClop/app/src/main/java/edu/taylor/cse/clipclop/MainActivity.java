@@ -27,13 +27,16 @@ int bufferSize = 5;
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                EditText bufferSizeDisplay = (EditText) findViewById(R.id.editText);
-                bufferSize = Integer.parseInt(bufferSizeDisplay.getText().toString());
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
-
+                EditText bufferSizeDisplay = (EditText) findViewById(R.id.editText);
+                String text = bufferSizeDisplay.getText().toString();
+                if(!text.contentEquals(""))
+                {
+                    bufferSize = Integer.parseInt(text);
+                }
             }
         };
 
