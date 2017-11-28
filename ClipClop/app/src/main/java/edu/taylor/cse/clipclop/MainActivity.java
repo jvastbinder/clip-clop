@@ -16,19 +16,17 @@ import java.util.Queue;
 
 
 public class MainActivity extends AppCompatActivity {
-int bufferSize = 5;
+
     private ClipData clip;
     private String convertedClipData;
-    private LinkedList<String> clipQueue;
     private ClipboardManager mClipboard;
-    private Iterator<String> clipIterator;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         BufferNotif.setContext(getApplicationContext());
 
-        final LinkedList<String> buffer;
         EditText bufferSizeDisplay = (EditText) findViewById(R.id.editText);
         TextWatcher watcher = new TextWatcher() {
             @Override
@@ -47,11 +45,12 @@ int bufferSize = 5;
                 {
                     if(Integer.parseInt(text) < 1)
                     {
-                        changeBufferSizeDisplay(1);
+                        BufferData.setSize(1);
+                        changeBufferSizeDisplay();
                     }
                     else
                     {
-                        bufferSize = Integer.parseInt(text);
+                        BufferData.setSize(Integer.parseInt(text));
                     }
                 }
             }
@@ -64,7 +63,6 @@ int bufferSize = 5;
         clip = ClipData.newPlainText(
                 "What is on clipboard currently",
                 "Add to buffer");
-        clipQueue = new LinkedList<String>();
 
         mClipboard.addPrimaryClipChangedListener(
                 new ClipboardManager.OnPrimaryClipChangedListener() {
@@ -78,49 +76,38 @@ int bufferSize = 5;
                             return;
                         convertedClipData = clip.getItemAt(0).getText().toString();
                         //check to see if copied item is already in buffer
-                        clipIterator = clipQueue.iterator();
+
                         boolean isClipInQueue = false;
-                        while(clipIterator.hasNext()){
-                            if (clipIterator.next().matches(convertedClipData)){
+                        for (String item: BufferData.data){
+                            if (item.matches(convertedClipData)){
                                 isClipInQueue = true;
                             }
                         }
 
                         if(isClipInQueue == false){
-                            clipQueue.add(convertedClipData);
+                            BufferData.data.add(convertedClipData);
                         }
 
-
-                        while (clipQueue.size() > bufferSize) {
-                            clipQueue.poll();
-                        }
-
-                        BufferNotif.setBufferContents(clipQueue);
                         BufferNotif.showBigBufferInterface();
                     }
                 });
     }
 
     public void plusButton(View view){
-        changeBufferSizeDisplay(++bufferSize);
+        BufferData.setSize(BufferData.getSize()+1);
+        changeBufferSizeDisplay();
     }
 
     public void minusButton(View view){
-        changeBufferSizeDisplay(--bufferSize);
-
-        while (clipQueue.size() > bufferSize) {
-            clipQueue.poll();
-        }
-
-        BufferNotif.setBufferContents(clipQueue);
-        BufferNotif.showBigBufferInterface();
+        BufferData.setSize(BufferData.getSize()-1);
+        changeBufferSizeDisplay();
     }
 
-    private void changeBufferSizeDisplay(int size)
+    private void changeBufferSizeDisplay()
     {
         //TODO decide min/max buffer size and handle accordingly
         EditText bufferSizeDisplay = (EditText) findViewById(R.id.editText);
-        bufferSizeDisplay.setText("" + size);
+        bufferSizeDisplay.setText(String.format("%d",BufferData.getSize()));
     }
 
 }

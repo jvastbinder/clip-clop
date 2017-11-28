@@ -73,7 +73,7 @@ public class BufferNotif {
 
     public static void showBigBufferInterface()
     {
-        for (int cancelId=buffer.size(); cancelId <= lastBufferSizeShown; cancelId++)
+        for (int cancelId=BufferData.getSize(); cancelId <= lastBufferSizeShown; cancelId++)
             cancel(cancelId);
 
         lastBufferSizeShown=1;
