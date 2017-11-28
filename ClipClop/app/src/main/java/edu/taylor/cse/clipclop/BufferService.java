@@ -21,6 +21,7 @@ public class BufferService extends IntentService {
             String bufferItem = intent.getStringExtra("pasteItem");
             PasteBuffer paste = new PasteBuffer(getApplicationContext());
             paste.setPasteContent("pasteItem",bufferItem);
+            paste.pasteReadyNotification("Item placed in clipboard");
         }
     }
 }

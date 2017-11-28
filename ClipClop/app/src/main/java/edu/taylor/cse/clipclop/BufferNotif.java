@@ -25,6 +25,7 @@ public class BufferNotif {
     private static final String NOTIFICATION_TAG = "BufferNotif";
     private static LinkedList<String> buffer;
     private static Context context;
+    private static int lastBufferSizeShown=0;
 
     /**
      * Shows the notification, or updates a previously shown notification of
@@ -67,11 +68,15 @@ public class BufferNotif {
 
                 .setOngoing(true);
 
-        notify(context, builder.build(),0);
+        notify( builder.build(),0);
     }
 
     public static void showBigBufferInterface()
     {
+        for (int cancelId=buffer.size(); cancelId <= lastBufferSizeShown; cancelId++)
+            cancel(cancelId);
+
+        lastBufferSizeShown=1;
         int notifId=1;
         final Resources res = context.getResources();
         for (String item: buffer)
@@ -90,16 +95,17 @@ public class BufferNotif {
                                 pasteIntent,
                                 PendingIntent.FLAG_CANCEL_CURRENT))
                   //  .setGroup("buffer")
-                    .setContentTitle(item);
+                    .setContentTitle(item.substring(0, Math.min(item.length(), 20)));
 
-            notify(context, builder.build(),notifId);
+            notify(builder.build(),notifId);
             notifId+=1;
+            lastBufferSizeShown+=1;
        }
 
     }
 
     @TargetApi(Build.VERSION_CODES.ECLAIR)
-    private static void notify(final Context context, final Notification notification, int notifId) {
+    private static void notify(final Notification notification, int notifId) {
         final NotificationManager nm = (NotificationManager) context
                 .getSystemService(Context.NOTIFICATION_SERVICE);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ECLAIR) {
@@ -113,11 +119,11 @@ public class BufferNotif {
      * Cancels any notifications of this type
      */
     @TargetApi(Build.VERSION_CODES.ECLAIR)
-    public static void cancel(final Context context) {
+    public static void cancel(int notifId) {
         final NotificationManager nm = (NotificationManager) context
                 .getSystemService(Context.NOTIFICATION_SERVICE);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ECLAIR) {
-            nm.cancel(NOTIFICATION_TAG, 0);
+            nm.cancel(NOTIFICATION_TAG, notifId);
         } else {
             nm.cancel(NOTIFICATION_TAG.hashCode());
         }
