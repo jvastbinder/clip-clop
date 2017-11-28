@@ -2,7 +2,7 @@ Get the clipboard listener to work as defined
 Make the number of clipped items actually reflect in the notification
 Make the +/- work with the typing
 Merge branches
-Publish to the Play Store
+Publish to the Play Store unless it costs $25
 Create a diagram of the clip data flow
 Create End User Documentation
 Class diagram for the classes we added
