@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
                         }
 
                         if(isClipInQueue == false){
-                            BufferData.data.add(convertedClipData);
+                            BufferData.enqueue(convertedClipData);
                         }
 
                         BufferNotif.showBigBufferInterface();

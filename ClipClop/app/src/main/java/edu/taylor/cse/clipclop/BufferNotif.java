@@ -56,7 +56,7 @@ public class BufferNotif {
                 .setCategory(Notification.CATEGORY_SERVICE)
 
                 .setSmallIcon(R.drawable.ic_stat_buffer_notif)
-                .setContentText(String.format("%d items ready to paste", BufferData.data.size()))
+                .setContentText(String.format("%d items ready to paste", BufferData.getSize()))
                 .setContentTitle("Clip Buffer")
                 .setGroup("buffer")
                 .setGroupSummary(true)
@@ -85,9 +85,9 @@ public class BufferNotif {
             pasteIntent.setAction("edu.taylor.cse.place_in_clipboard-"+item)
                     .putExtra("pasteItem", item);
 
-            Intent deleteIntent = new Intent(context, BufferService.class);
-            pasteIntent.setAction("edu.taylor.cse.delete_from_queue-"+item)
-                    .putExtra("deleteItem", item);
+ //           Intent deleteIntent = new Intent(context, BufferService.class);
+ //           pasteIntent.setAction("edu.taylor.cse.delete_from_queue-"+item)
+ //                   .putExtra("deleteItem", item);
 
             NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
                     .setCategory(Notification.CATEGORY_SERVICE)
@@ -98,14 +98,16 @@ public class BufferNotif {
                                 0,
                                 pasteIntent,
                                 PendingIntent.FLAG_CANCEL_CURRENT))
+                    .setOngoing(true)
                   //  .setGroup("buffer")
-                    .setDeleteIntent(
-                            PendingIntent.getService(context,
-                                    0,
-                            deleteIntent,
-                            PendingIntent.FLAG_CANCEL_CURRENT)
-                    )
-                    .setContentTitle(item.substring(0, Math.min(item.length(), 20)));
+                 //   .setDeleteIntent(
+                   //         PendingIntent.getService(context,
+                     //               0,
+                    //        deleteIntent,
+                    //        PendingIntent.FLAG_CANCEL_CURRENT)
+
+                   // )
+                    .setContentTitle(item.substring(0, Math.min(item.length(), 50)));
 
             notify(builder.build(),notifId);
             notifId+=1;

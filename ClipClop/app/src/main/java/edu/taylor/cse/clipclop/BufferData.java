@@ -8,13 +8,22 @@ public class BufferData {
     public static Queue<String> data = new LinkedList();
     private static int size = 5;
 
+    public static void enqueue(String item)
+    {
+        data.add(item);
+        while (data.size()>size)
+            data.poll();
+
+    }
+
     public static void setSize(int newSize)
     {
-        size=newSize;
+        if(newSize >= 1)
+            size=newSize;
+        
         while (data.size()>size)
-        {
             data.poll();
-        }
+
         BufferNotif.showBigBufferInterface();
     }
 
