@@ -35,11 +35,14 @@ int bufferSize = 5;
                 String text = bufferSizeDisplay.getText().toString();
                 if(!text.contentEquals(""))
                 {
-                    bufferSize = Integer.parseInt(text);
-                }
-                if(Integer.parseInt(text) < 1)
-                {
-                    changeBufferSizeDisplay(1);
+                    if(Integer.parseInt(text) < 1)
+                    {
+                        changeBufferSizeDisplay(1);
+                    }
+                    else
+                    {
+                        bufferSize = Integer.parseInt(text);
+                    }
                 }
             }
         };
