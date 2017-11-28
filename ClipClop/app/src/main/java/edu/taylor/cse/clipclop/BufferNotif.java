@@ -23,7 +23,7 @@ public class BufferNotif {
      * The unique identifier for this type of notification.
      */
     private static final String NOTIFICATION_TAG = "BufferNotif";
-    private static LinkedList<String> buffer;
+//    private static LinkedList<String> buffer;
     private static Context context;
     private static int lastBufferSizeShown=0;
 
@@ -33,10 +33,10 @@ public class BufferNotif {
      * @see #cancel(Context)
      */
 
-    public static void setBufferContents(LinkedList<String> bufferList)
-    {
-        buffer=bufferList;
-    }
+ //   public static void setBufferContents(LinkedList<String> bufferList)
+  //  {
+  //      buffer=bufferList;
+ //   }
 
     public static void setContext(Context cxt)
     {
@@ -56,7 +56,7 @@ public class BufferNotif {
                 .setCategory(Notification.CATEGORY_SERVICE)
 
                 .setSmallIcon(R.drawable.ic_stat_buffer_notif)
-                .setContentText(String.format("%d items ready to paste", buffer.size()))
+                .setContentText(String.format("%d items ready to paste", BufferData.data.size()))
                 .setContentTitle("Clip Buffer")
                 .setGroup("buffer")
                 .setGroupSummary(true)
@@ -79,11 +79,15 @@ public class BufferNotif {
         lastBufferSizeShown=1;
         int notifId=1;
         final Resources res = context.getResources();
-        for (String item: buffer)
+        for (String item: BufferData.data)
         {
             Intent pasteIntent = new Intent(context, BufferService.class);
             pasteIntent.setAction("edu.taylor.cse.place_in_clipboard-"+item)
                     .putExtra("pasteItem", item);
+
+            Intent deleteIntent = new Intent(context, BufferService.class);
+            pasteIntent.setAction("edu.taylor.cse.delete_from_queue-"+item)
+                    .putExtra("deleteItem", item);
 
             NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
                     .setCategory(Notification.CATEGORY_SERVICE)
@@ -95,6 +99,12 @@ public class BufferNotif {
                                 pasteIntent,
                                 PendingIntent.FLAG_CANCEL_CURRENT))
                   //  .setGroup("buffer")
+                    .setDeleteIntent(
+                            PendingIntent.getService(context,
+                                    0,
+                            deleteIntent,
+                            PendingIntent.FLAG_CANCEL_CURRENT)
+                    )
                     .setContentTitle(item.substring(0, Math.min(item.length(), 20)));
 
             notify(builder.build(),notifId);

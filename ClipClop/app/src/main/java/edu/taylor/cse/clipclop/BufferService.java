@@ -23,5 +23,10 @@ public class BufferService extends IntentService {
             paste.setPasteContent("pasteItem",bufferItem);
             paste.pasteReadyNotification("Item placed in clipboard");
         }
+        else if (intent.getAction().contains("edu.taylor.cse.delete_from_queue"))
+        {
+            String deleteItem = intent.getStringExtra("deleteItem");
+            BufferData.data.remove(deleteItem);
+        }
     }
 }
