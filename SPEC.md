@@ -11,9 +11,7 @@ ClipClop is an expansion of the clipboard in Android. It will allow it's users t
 |-|-|-|-| 
 | The application will have a name other than EVERGREEN | med | 
 | The application will have an associated launcher icon that can be used without copyright claims. | med |
-| The application will appear in the top ten apps listed when a user searches for “copy and paste” or “clipboard” in the Google play store. | low | 
 | ClipClop will operate with full functionality on any phone running Android 4.2 or higher | high |
-| ClipClop will operate with full functionality on any tablet running Android 4.2 or higher | low |  
 | If ClipClop is installed on a Pixel XL, the resulting slowdown and battery drain will not be noticable | high | 
 | ClipClop will be developed using the native Android libraries | high| 
 | ClipClop will not be designed with Titanium or HTML | high | 
@@ -27,13 +25,12 @@ ClipClop is an expansion of the clipboard in Android. It will allow it's users t
 | The buffer interface will be accessible in no more than three taps from any application that does not hide the notification bar | high | 
 | The buffer interface will not steal application focus from the current application, instead, the buffer interface will be accessed within the notification menu or within a floating menu | high |
 | The buffer interface will provide the user with a list of most recent clippings. | high |
-| The buffer interface will allow the user to pin a clipping. A pinned clipping will be accessible in the buffer interface until it is unpinned | low | 
 | The buffer interface will only display strings that have been copied. Images will not be displayed. | high | not started | | 
 | Clippings stored in the buffer interface will be truncated when they are too long to be entirely visible in the buffer menu. | high | 
 | When a item is selected in the buffer interface, it will be placed into Andoid system clipboard and not directly pasted in | high | 
 | When the user copies an item, the item will be diplayed in the buffer interface | high | 
 | ClipClop will persistently display a notification that can be used to access the butter interface | high | 
-| Pinned items will appear in a different list than the recently copied items | med | 
+
 
 ### Prefs Interface
 | Behavior | Priority | 
