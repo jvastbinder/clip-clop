@@ -10,6 +10,7 @@ import android.text.TextWatcher;
 import android.widget.EditText;
 import android.view.View;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -20,6 +21,7 @@ int bufferSize = 5;
     private String convertedClipData;
     private LinkedList<String> clipQueue;
     private ClipboardManager mClipboard;
+    private Iterator<String> clipIterator;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,8 +77,19 @@ int bufferSize = 5;
                                 )
                             return;
                         convertedClipData = clip.getItemAt(0).getText().toString();
+                        //check to see if copied item is already in buffer
+                        clipIterator = clipQueue.iterator();
+                        boolean isClipInQueue = false;
+                        while(clipIterator.hasNext()){
+                            if (clipIterator.next().matches(convertedClipData)){
+                                isClipInQueue = true;
+                            }
+                        }
 
-                        clipQueue.add(convertedClipData);
+                        if(isClipInQueue == false){
+                            clipQueue.add(convertedClipData);
+                        }
+
 
                         while (clipQueue.size() > bufferSize) {
                             clipQueue.poll();
