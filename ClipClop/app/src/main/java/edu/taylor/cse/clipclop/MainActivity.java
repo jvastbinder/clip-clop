@@ -18,7 +18,7 @@ int bufferSize = 5;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        LinkedList<String> buffer;
+        final LinkedList<String> buffer;
         EditText bufferSizeDisplay = (EditText) findViewById(R.id.editText);
         TextWatcher watcher = new TextWatcher() {
             @Override
@@ -36,6 +36,10 @@ int bufferSize = 5;
                 if(!text.contentEquals(""))
                 {
                     bufferSize = Integer.parseInt(text);
+                }
+                if(Integer.parseInt(text) < 1)
+                {
+                    changeBufferSizeDisplay(1);
                 }
             }
         };
