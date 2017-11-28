@@ -2,6 +2,8 @@ package edu.taylor.cse.clipclop;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.widget.EditText;
 import android.view.View;
 
@@ -16,8 +18,36 @@ int bufferSize = 5;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        LinkedList<String> buffer;
+        final LinkedList<String> buffer;
+        EditText bufferSizeDisplay = (EditText) findViewById(R.id.editText);
+        TextWatcher watcher = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
 
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                EditText bufferSizeDisplay = (EditText) findViewById(R.id.editText);
+                String text = bufferSizeDisplay.getText().toString();
+                if(!text.contentEquals(""))
+                {
+                    if(Integer.parseInt(text) < 1)
+                    {
+                        changeBufferSizeDisplay(1);
+                    }
+                    else
+                    {
+                        bufferSize = Integer.parseInt(text);
+                    }
+                }
+            }
+        };
+
+        bufferSizeDisplay.addTextChangedListener(watcher);
 
         //Add copied string to clipboard by initializing listener
         ClipboardListener cliplistener = new ClipboardListener(getApplicationContext());
