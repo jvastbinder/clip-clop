@@ -1,5 +1,8 @@
 package edu.taylor.cse.clipclop;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -8,15 +11,20 @@ import android.widget.EditText;
 import android.view.View;
 
 import java.util.LinkedList;
-
+import java.util.Queue;
 
 
 public class MainActivity extends AppCompatActivity {
 int bufferSize = 5;
+    private ClipData clip;
+    private String convertedClipData;
+    private LinkedList<String> clipQueue;
+    private ClipboardManager mClipboard;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        BufferNotif.setContext(getApplicationContext());
 
         final LinkedList<String> buffer;
         EditText bufferSizeDisplay = (EditText) findViewById(R.id.editText);
@@ -50,16 +58,34 @@ int bufferSize = 5;
         bufferSizeDisplay.addTextChangedListener(watcher);
 
         //Add copied string to clipboard by initializing listener
-        ClipboardListener cliplistener = new ClipboardListener(getApplicationContext());
-        cliplistener.setNumClips(4);
-        buffer=(LinkedList<String>) cliplistener.getClipQueue();
+        mClipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+        clip = ClipData.newPlainText(
+                "What is on clipboard currently",
+                "Add to buffer");
+        clipQueue = new LinkedList<String>();
 
-        buffer.add("Test string");
+        mClipboard.addPrimaryClipChangedListener(
+                new ClipboardManager.OnPrimaryClipChangedListener() {
+                    @Override
+                    public void onPrimaryClipChanged() {
+                        clip = mClipboard.getPrimaryClip();
+                        if(   clip == null
+                                || clip.getItemCount() == 0
+                                || clip.getItemCount() > 0 && clip.getItemAt(0).getText() == null
+                                )
+                            return;
+                        convertedClipData = clip.getItemAt(0).getText().toString();
 
-        BufferNotif.setContext(getApplicationContext());
-        BufferNotif.setBufferContents(buffer);
-        BufferNotif.showBigBufferInterface();
+                        clipQueue.add(convertedClipData);
 
+                        while (clipQueue.size() > bufferSize) {
+                            clipQueue.poll();
+                        }
+
+                        BufferNotif.setBufferContents(clipQueue);
+                        BufferNotif.showBigBufferInterface();
+                    }
+                });
     }
 
     public void plusButton(View view){
@@ -68,6 +94,13 @@ int bufferSize = 5;
 
     public void minusButton(View view){
         changeBufferSizeDisplay(--bufferSize);
+
+        while (clipQueue.size() > bufferSize) {
+            clipQueue.poll();
+        }
+
+        BufferNotif.setBufferContents(clipQueue);
+        BufferNotif.showBigBufferInterface();
     }
 
     private void changeBufferSizeDisplay(int size)
